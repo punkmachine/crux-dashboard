@@ -1,0 +1,17 @@
+/** @type {import('prettier').Config} */
+export default {
+  $schema: "https://json.schemastore.org/prettierrc",
+  semi: true,
+  tabWidth: 2,
+  singleQuote: true,
+  printWidth: 120,
+  trailingComma: "all",
+  quoteProps: "consistent",
+  bracketSpacing: true,
+  bracketSameLine: false,
+  arrowParens: "avoid",
+  endOfLine: "lf",
+  useTabs: false,
+  singleAttributePerLine: true,
+  plugins: ["prettier-plugin-tailwindcss"],
+};
