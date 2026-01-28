@@ -12,9 +12,13 @@ import { renderLcpImageRenderDelay } from "./lcp-image-render-delay/main";
 
 /**
  * Очищает дашборд, удаляя контейнер с результатами из DOM.
+ * Если передан контейнер, очищает только результаты внутри него.
+ *
+ * @param container - Опциональный контейнер для очистки
  */
-export function clearDashboard(): void {
-  const resultsContainer = document.querySelector(".results");
+export function clearDashboard(container?: HTMLElement): void {
+  const searchRoot = container || document;
+  const resultsContainer = searchRoot.querySelector(".results");
 
   if (resultsContainer) {
     resultsContainer.remove();
@@ -32,7 +36,7 @@ export function renderDashboard(
   data: CruxResponse,
   container: HTMLElement,
 ): void {
-  clearDashboard();
+  clearDashboard(container);
 
   if (data.error) {
     showError(`Ошибка API: ${data.error.message}`, container);
