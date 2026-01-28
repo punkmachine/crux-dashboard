@@ -23,12 +23,6 @@ pnpm install
 VITE_CRUX_API_KEY=your_api_key_here
 ```
 
-## Получение API ключа
-
-```env
-VITE_CRUX_API_KEY=ваш_ключ_здесь
-```
-
 ## Использование
 
 ### Разработка
