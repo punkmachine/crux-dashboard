@@ -4,25 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
     "format": "prettier --write .",
     "prepare": "husky"
   },
   "devDependencies": {
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.7",
-    "prettier": "^3.8.1",
-    "typescript": "~5.9.3",
-    "vite": "npm:rolldown-vite@7.2.5"
+    "prettier": "^3.8.1"
   },
-  "pnpm": {
-    "overrides": {
-      "vite": "npm:rolldown-vite@7.2.5"
-    }
-  },
-  "dependencies": {
-    "chart.js": "^4.5.1"
+  "engines": {
+    "node": ">=24.0.0",
+    "pnpm": ">=10.0.0"
   }
 }

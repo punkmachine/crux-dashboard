@@ -13,4 +13,5 @@ export default {
   endOfLine: "lf",
   useTabs: false,
   singleAttributePerLine: true,
+  plugins: ["prettier-plugin-tailwindcss"],
 };
