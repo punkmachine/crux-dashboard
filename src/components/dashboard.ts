@@ -2,6 +2,8 @@ import type { CruxResponse } from "../types/crux";
 import { showError } from "../utils/ui";
 import { renderCoreMetrics } from "./core-metrics/main";
 import { renderPerformanceMetrics } from "./performance-metrics/main";
+import { renderFormFactors } from "./form-factors/main";
+import { renderNavigationTypes } from "./navigation-types/main";
 
 /**
  * Очищает дашборд, удаляя контейнер с результатами из DOM.
@@ -77,6 +79,25 @@ export function renderDashboard(
   const performanceMetricsElement = renderPerformanceMetrics(data);
   if (performanceMetricsElement) {
     resultsContainer.appendChild(performanceMetricsElement);
+  }
+
+  // Рендерим блок с распределительными метриками (Form Factors и Navigation Types)
+  const formFactorsElement = renderFormFactors(data);
+  const navigationTypesElement = renderNavigationTypes(data);
+
+  if (formFactorsElement || navigationTypesElement) {
+    const distributionContainer = document.createElement("div");
+    distributionContainer.className = "distribution-metrics";
+
+    if (formFactorsElement) {
+      distributionContainer.appendChild(formFactorsElement);
+    }
+
+    if (navigationTypesElement) {
+      distributionContainer.appendChild(navigationTypesElement);
+    }
+
+    resultsContainer.appendChild(distributionContainer);
   }
 
   container.appendChild(resultsContainer);

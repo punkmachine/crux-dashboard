@@ -246,3 +246,67 @@ body {
   width: 100% !important;
   height: 100% !important;
 }
+
+/* Distribution Metrics */
+.distribution-metrics {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+@media (min-width: 768px) {
+  .distribution-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.distribution-metric {
+  width: 100%;
+}
+
+.distribution-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.distribution-card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 2px 4px 0 rgba(60, 64, 67, 0.3),
+    0 2px 6px 2px rgba(60, 64, 67, 0.15);
+}
+
+.distribution-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.distribution-card__title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.distribution-card__chart {
+  height: 300px;
+  position: relative;
+  min-height: 300px;
+}
+
+.distribution-card__chart canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
