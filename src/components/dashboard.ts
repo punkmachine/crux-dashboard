@@ -4,6 +4,11 @@ import { renderCoreMetrics } from "./core-metrics/main";
 import { renderPerformanceMetrics } from "./performance-metrics/main";
 import { renderFormFactors } from "./form-factors/main";
 import { renderNavigationTypes } from "./navigation-types/main";
+import { renderLcpResourceType } from "./lcp-resource-type/main";
+import { renderLcpImageTtfb } from "./lcp-image-ttfb/main";
+import { renderLcpImageLoadDelay } from "./lcp-image-load-delay/main";
+import { renderLcpImageLoadDuration } from "./lcp-image-load-duration/main";
+import { renderLcpImageRenderDelay } from "./lcp-image-render-delay/main";
 
 /**
  * Очищает дашборд, удаляя контейнер с результатами из DOM.
@@ -98,6 +103,44 @@ export function renderDashboard(
     }
 
     resultsContainer.appendChild(distributionContainer);
+  }
+
+  // Рендерим блок с метриками детализации LCP
+  const lcpResourceTypeElement = renderLcpResourceType(data);
+  const lcpImageTtfbElement = renderLcpImageTtfb(data);
+  const lcpImageLoadDelayElement = renderLcpImageLoadDelay(data);
+  const lcpImageLoadDurationElement = renderLcpImageLoadDuration(data);
+  const lcpImageRenderDelayElement = renderLcpImageRenderDelay(data);
+
+  const lcpDetailElements = [
+    lcpResourceTypeElement,
+    lcpImageTtfbElement,
+    lcpImageLoadDelayElement,
+    lcpImageLoadDurationElement,
+    lcpImageRenderDelayElement,
+  ].filter((el) => el !== null) as HTMLElement[];
+
+  if (lcpDetailElements.length > 0) {
+    const lcpDetailsContainer = document.createElement("div");
+    lcpDetailsContainer.className = "lcp-details";
+
+    // Первая строка: первые 3 элемента
+    const row1Elements = lcpDetailElements.slice(0, 3);
+    row1Elements.forEach((el) => lcpDetailsContainer.appendChild(el));
+
+    // Вторая строка: оставшиеся 2 элемента (центрированные)
+    const row2Elements = lcpDetailElements.slice(3, 5);
+    if (row2Elements.length === 2) {
+      const row2Container = document.createElement("div");
+      row2Container.className = "lcp-details__row-2";
+      row2Elements.forEach((el) => row2Container.appendChild(el));
+      lcpDetailsContainer.appendChild(row2Container);
+    } else if (row2Elements.length === 1) {
+      // Если только один элемент во второй строке, добавляем его напрямую
+      lcpDetailsContainer.appendChild(row2Elements[0]);
+    }
+
+    resultsContainer.appendChild(lcpDetailsContainer);
   }
 
   container.appendChild(resultsContainer);
